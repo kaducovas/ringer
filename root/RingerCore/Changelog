@@ -1,0 +1,247 @@
+2019-02-28 Werner S Freund
+	* Added possibility to save method only return the file output name (not a
+	good option though).
+	* Not tagging until it is fixed to a better solution.
+
+2018-12-12 Werner S Freund
+	* Added prependAppendToFile.
+	* save function can try to save matlab files
+	* Tagging RingerCore-01-01-02
+
+2018-08-03 Werner S Freund
+	* Improved BooleanStr to return False and True python booleans instead of
+	integers 0 and 1.
+	* Tagging RingerCore-01-01-01
+
+2017-02-24 Werner S Freund
+	* Tagging RingerCore-01-01-00
+
+2017-02-20 Werner S Freund
+	* Improving watch lock when saving files;
+	* Not tagging
+
+2017-02-19 Werner S Freund
+	* Improved inspect_list_attrs to also work in the singleton cases
+	* FileIO can now list files with full path or not
+	* Added hadd_chunk script
+	* Tagging RingerCore-01-01-00d
+
+2017-02-14 Werner S Freund
+	* Added lock file class
+	* Not tagging
+
+2017-02-14 Werner S Freund
+	* Allow git tags to have letters after the tagging numbers.
+	* Tagging RingerCore-01-01-00c
+
+2017-02-14 Werner S Freund
+	* Important bug fix on inspect_list_attrs which would span dimension using
+	the same instances. Besides the fix, it will now by default work on
+	deepcopy of the instances now.
+	* Tagging RingerCore-01-01-00b
+
+2017-02-13 Werner S Freund
+	* Added support to AnalysisBase integration
+	* Added firstItemDepth to LoopingBounds module
+	* Log messages now show Cxx. prefix when logging from that side.
+	* Fix in GitConfiguration
+	* Added firstItemDepth to LoopingBounds;
+	* Added method reducePowerOf10Str
+	* Fixed Git.py incompatibility on RootCore side
+	* Tagging RingerCore-01-01-00a
+
+2017-01-04 Werner S Freund
+	* Protect expandFolders from keeping folders in the returned list
+	* Tagging RingerCore-01-00-24
+
+2017-01-04 Werner S Freund
+	* Added method to check whether item is in LoopingBounds
+	* Tagging RingerCore-01-00-23
+
+2017-12-21 Werner S Freund
+	* Fix for the git tag also accept commits in the git describe str
+	* Set development to be auto configured only when first requested
+	allowing user to manual set it before if needed.
+	* development is now a Configure instance instead of the resulting int
+	* Tagging RingerCore-01-00-22
+
+2017-12-20 Werner S Freund
+	* Fix on traverse with max_depth_level.
+	* Improve rawDict speed by loading keys when they are not in
+	ignore list
+	* Tagging RingerCore-01-00-21.
+
+2017-12-18 Werner S Freund
+	* Improved git version retrieval when .git file is a folder instead of a
+	pointer to the submodule path.
+	* Tagging RingerCore-01-00-20.
+
+2017-12-18 Werner S Freund
+	* Temporarily added excluded sites flag.
+	* Argparser now prints help using logger instance.
+	* Tagging RingerCore-01-00-19.
+
+2017-12-18 Werner S Freund
+	* Added development flag.
+  * Tagging RingerCore-01-00-18.
+
+2017-12-17 Werner S Freund
+	* Added specific configuration classes that allow setting
+	limited or cast to type configuration instances.
+	* Bug fix in Logger module that would display non-breaking lines
+	messages when inside of unicode stream environment.
+	* Added rucio extract_scope method
+	* Added MultiThread automatic retrieval instance
+	* Improved Argparser help parsing and added default values.
+  * Tagging RingerCore-01-00-17
+
+2017-12-15 Werner S Freund
+	* Added option to inspect_list_attrs to not complain if input dimension it
+	does not match required dimension size when it is required to be of single
+	dimension.
+  * Tagging RingerCore-01-00-16
+
+2017-12-02 Werner S Freund
+  * Fixed logging parser
+  * Tagging RingerCore-01-00-15
+
+2017-11-19 Werner S Freund
+  * Do not work with class converter to avoid keeping old attributes and
+	leading in difficult to track errors
+  * Tagging RingerCore-01-00-14
+
+2017-11-15 Werner S Freund
+  * Added multi-core option
+  * Tagging RingerCore-01-00-13
+
+2017-09-20 Werner S Freund
+  * Added rounding method and improved texAPI table
+
+2017-09-15 Werner S Freund
+  * Important bugfix in traverse
+
+2017-09-02 Werner S Freund
+  * Fixed loggers not being able to retrieve --output-level since the option
+	was being consumed by masterLevel
+  * Tagging RingerCore-01-00-12
+
+2017-09-01 Werner S Freund
+  * Set git to ignore changes in Makefile.RootCore to allow tags to appear
+clean even when there are changes in MakeFile.RootCore
+  * Tagging RingerCore-01-00-11
+
+2017-09-01 Werner S Freund
+	* Improved git version handling (will optimize for speed later) as a
+	Configure instance which can also be parsed and send to remotely to jobs
+	which can't access the git version locally.
+	* Rearranged cmd_exists to be in Configure
+	* Tagging RingerCore-01-00-10
+
+2017-08-25 Werner S Freund
+	* Fixed looping newline when nesting many measureLoopTime and progressbars
+
+2017-08-24 Werner S Freund
+	* Added straverse and improved select method
+
+2017-08-02 Werner S Freund
+	* Fixed globing to use it only if * is found at file name
+
+2017-08-01 Werner S Freund
+	* LoopingBounds can be used directly in loops via iter method.
+
+2017-07-31 Werner S Freund
+	* expandFolders now deal with path globing
+
+2017-07-28 Werner S Freund
+	* Added EnumStringification methods to retrieve enumeration string/ints
+	* Added protection when loading wrong file types
+	* Tagging RingerCore-01-00-09
+
+2017-04-30 Werner S Freund
+	* Added beamer ignore missing flag.
+	* Changed beamer outline format.
+
+2017-04-27 Werner S Freund
+	* Fix to handle new numpy version which changed the way the
+	fortran_contiguous and c_contiguous flags are set on 2D arrays.
+	* Tagging RingerCore-01-00-08.
+
+2017-01-24 Werner S Freund
+	* Workaround panda submission issue that adds extra excludeFiles without
+	checking if appending a comma is needed.
+
+2017-01-22 Werner S Freund
+	* Version also working on the grid.
+	* Tagging RingerCore-01-00-07.
+
+2017-01-22 Werner S Freund
+	* Plenty of bug fixes, now tuning operational at loboc and will be tested
+	on the grid.
+	* Tagging RingerCore-01-00-06.
+
+2017-01-21 Werner S Freund
+	* Separated grid from no_color, allowing to run on grid mode with color
+	* Bug fix on LimitedTypeList, which was not adding __init__ method
+	due to object/list __init__ methods.
+	* Tagging RingerCore-01-00-05.
+
+2017-01-20 Werner S Freund
+	* Added tex/beamer api.
+	* Silenced boost dirname complaint when no boost is available in the
+	LD_LIBRARY_PATH.
+	* Improved LimitedTypeList to check if base classes are list subclasses
+	as well as if they declare _acceptedTypes (where the first base
+	_acceptedTypes will be used by default).
+	* Only add __init__ method for LimitedTypeList when it does not
+	inherit from a LimitedTypeList.
+	* Added simple method to calculate function execution time.
+	* Bug fix on inspect_list_attrs when depth was zero and wantedTypes was None
+	* Tagging RingerCore-01-00-04.
+
+2017-01-12 Werner S Freund
+	* Fixed Logger overriding class attributes for its message methods without
+	when starting without '_'
+	* Tagging RingerCore-01-00-03.
+
+2017-01-12 Werner S Freund
+	* Protect against wrong type setup on cluster manager setup
+	* Tagging RingerCore-01-00-02.
+
+2017-01-12 Werner S Freund
+	* Improved Configured class to detect auto-configuration issues;
+	* Handle argparse inexact argument matching for cluster-manager option;
+	* Added ncpus configuration to local cluster jobs;
+	* Logger instances now redirects message displaying methods to  the _logger
+	Attribute.
+	* Tagging RingerCore-01-00-01.
+
+2017-01-08 Werner S Freund
+	* Final arrangaments before going to release.
+	* Tagging RingerCore-01-00-00
+
+2017-01-07 Werner S Freund
+	* python/FileIO.py, python/LimitedTypeList.py, python/LoopingBounds.py,
+	python/util.py: Small import fixes
+	* Added master logging level control with mutting capabilities.
+	* Added global cluster-manager control.
+
+2017-01-06 Werner S Freund
+	* util.py: Moved traverse and related objects to LoopingBounds.py,
+	also moved EnumStringification to Configure.py as it is commonly used
+	for configuration.
+	* Configure.py: Created a based class which can be used together with
+	EnumStringification to generate a Singleton (through the Holder class) that
+	can be retrieved and mantain a unique flow over the different modules.
+	* __init__.py: Added version to file.
+	* util.py: Added method which dynamically returns the git description
+	of the module state.
+
+2017-01-04 Werner S Freund
+	* Improved argparse interaction with the utilities that RingerCore provides
+	through the module ParsingUtils.py. The special cases are the
+	EnumStringification and the Logger classes, which now can automatically
+	detect those special cases.
+	* Also added a ClusterManager tool, which can be used to specify which
+	cluster manager is to be used.
+	* parsers/LocalCluster.py: new module with a parser for local clusters managers,
+	such as LSF and Torque/PBS.

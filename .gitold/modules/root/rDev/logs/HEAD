@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 0a6b23a08a259a659ab643cbc7d7f4d11a1fbb4b kaducovas <kaducovas@gmail.com> 1554144227 -0300	clone: from ssh://git@gitlab.cern.ch:7999/jodafons/rDev.git
+0a6b23a08a259a659ab643cbc7d7f4d11a1fbb4b cd84c956bf0f8bccd5ffe02432bf426dab640123 kaducovas <kaducovas@gmail.com> 1554144227 -0300	checkout: moving from master to cd84c956bf0f8bccd5ffe02432bf426dab640123
+cd84c956bf0f8bccd5ffe02432bf426dab640123 0a6b23a08a259a659ab643cbc7d7f4d11a1fbb4b kaducovas <kaducovas@gmail.com> 1554144316 -0300	pull origin master: Fast-forward
+0a6b23a08a259a659ab643cbc7d7f4d11a1fbb4b 0a6b23a08a259a659ab643cbc7d7f4d11a1fbb4b kaducovas <kaducovas@gmail.com> 1554144316 -0300	checkout: moving from 0a6b23a08a259a659ab643cbc7d7f4d11a1fbb4b to master
+0a6b23a08a259a659ab643cbc7d7f4d11a1fbb4b cd84c956bf0f8bccd5ffe02432bf426dab640123 kaducovas <kaducovas@gmail.com> 1561001633 -0300	checkout: moving from master to cd84c956bf0f8bccd5ffe02432bf426dab640123

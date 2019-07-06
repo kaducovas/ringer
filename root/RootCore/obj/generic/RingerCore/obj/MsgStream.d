@@ -1,0 +1,1 @@
+/home/caducovas/ringer/root/RootCore/obj/generic/RingerCore/obj/MsgStream.o /home/caducovas/ringer/root/RootCore/obj/generic/RingerCore/obj/MsgStream.d : /home/caducovas/ringer/root/RingerCore/Root/MsgStream.cxx /home/caducovas/ringer/root/RingerCore/RingerCore/MsgStream.h /home/caducovas/ringer/root/RingerCore/RingerCore/defines.h

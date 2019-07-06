@@ -1,0 +1,1 @@
+RootCoreMacros/setrootcore.sh

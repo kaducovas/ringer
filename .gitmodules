@@ -1,0 +1,15 @@
+[submodule "root/TuningTools"]
+	path = root/TuningTools
+	url = https://github.com/wsfreund/TuningTools.git
+[submodule "root/RingerCore"]
+	path = root/RingerCore
+	url = https://github.com/wsfreund/RingerCore.git
+[submodule "root/RootCoreMacros"]
+	path = root/RootCoreMacros
+	url = https://github.com/wsfreund/RootCoreMacros.git
+[submodule "root/TuningBook"]
+	path = root/TuningBook
+	url = ssh://git@gitlab.cern.ch:7999/jodafons/TuningBook.git
+[submodule "root/rDev"]
+	path = root/rDev
+	url = ssh://git@gitlab.cern.ch:7999/jodafons/rDev.git

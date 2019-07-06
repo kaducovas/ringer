@@ -1,0 +1,50 @@
+#!/bin/bash
+
+if test \! -f "$ROOTCOREBIN/../RootCoreMacros/base_env.sh"; then
+  if test "$RCM_GRID_ENV" -eq "1"; then
+    echo "RootCoreMacros sources are unavailable. Cannot download it from grid." && exit 1;
+  fi
+  git clone https://github.com/wsfreund/RootCoreMacros.git "$ROOTCOREBIN/.."
+fi
+
+source "$ROOTCOREBIN/../RootCoreMacros/base_env.sh" || { echo "Couldn't load base shell environment." && exit 1; }
+
+if type git >/dev/null 2>/dev/null & test "$RCM_GRID_ENV" -eq "0"; then
+  git update-index --assume-unchanged $MAKEFILE
+fi
+
+echo -n > "$NEW_ENV_FILE"
+chmod +x "$NEW_ENV_FILE"
+
+source gcc_python_compiler_path.sh
+source check_install_numpy.sh
+# NOTE: SCIPY installation should be able to fail on the grid.
+source check_install_scipy.sh
+
+# Add rootcore libs to python env file
+ROOTCORELIBPATH="\$ROOTCOREBIN/lib/\$ROOTCORECONFIG/"
+add_to_env_file PYTHONPATH "$ROOTCORELIBPATH"
+base_python_lib=${PYTHON_LIBRARY_PATH[@]:2}
+# Make sure that python library is added to path always
+add_to_env_file LD_LIBRARY_PATH "$base_python_lib"
+add_to_env_file PYTHONPATH "$base_python_lib/$PYTHON_LIB_VERSION"
+add_to_env_file PYTHONPATH "$base_python_lib/$PYTHON_LIB_VERSION/lib-dynload"
+add_to_env_file PYTHONPATH "$base_python_lib/$PYTHON_LIB_VERSION/site-packages"
+
+# Add openmp
+if check_openmp && test "$RCM_GRID_ENV" -eq "0"; then
+  OPENMP_CXX_OPTS="-DUSING_MULTI_THREAD"
+  old_field=$($ROOTCOREDIR/scripts/get_field.sh $MAKEFILE PACKAGE_OBJFLAGS)
+  if test "${old_field#*$OPENMP_CXX_OPTS}" = "$old_field"; then
+    $ROOTCOREDIR/scripts/set_field.sh $MAKEFILE \
+     PACKAGE_OBJFLAGS "$old_field $OPENMP_CXX_OPTS"
+  fi
+  OPENMP_LD_OPTS="-lgomp -DUSING_MULTI_THREAD"
+  old_field=$($ROOTCOREDIR/scripts/get_field.sh $MAKEFILE PACKAGE_LDFLAGS)
+  if test "${old_field#*$OPENMP_LD_OPTS}" = "$old_field"; then
+    $ROOTCOREDIR/scripts/set_field.sh $MAKEFILE \
+     PACKAGE_LDFLAGS "$old_field $OPENMP_LD_OPTS"
+  fi
+fi
+
+true

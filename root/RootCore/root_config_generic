@@ -1,0 +1,10 @@
+ROOTSYS = /home/caducovas/root
+PLATFORM = linux
+CXX = c++
+CXXFLAGS = -O2 -Wall -fPIC -pthread -std=c++11 -m64 -I/home/caducovas/root/include
+CXXFLAGS_NOOPT = -Wall -fPIC -pthread -std=c++11 -m64 -I/home/caducovas/root/include
+SOFLAGS = -shared
+LD = c++
+LDFLAGS = -m64
+ROOTLIBS = -L/home/caducovas/root/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -pthread -lm -ldl -rdynamic
+ROOT_VERSION = 6.16/00

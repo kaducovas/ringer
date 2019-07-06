@@ -1,0 +1,27 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/kaducovas/ringer.git
+	#url = https://:@gitlab.cern.ch:8443/jodafons/ringer.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[submodule "root/RingerCore"]
+	active = true
+	url = https://github.com/wsfreund/RingerCore.git
+[submodule "root/RootCoreMacros"]
+	active = true
+	url = https://github.com/wsfreund/RootCoreMacros.git
+[submodule "root/TuningBook"]
+	active = true
+	url = ssh://git@gitlab.cern.ch:7999/jodafons/TuningBook.git
+[submodule "root/TuningTools"]
+	active = true
+	url = https://github.com/kaducovas/TuningTools.git
+[submodule "root/rDev"]
+	active = true
+	url = ssh://git@gitlab.cern.ch:7999/jodafons/rDev.git

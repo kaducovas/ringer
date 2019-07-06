@@ -1,0 +1,120 @@
+#!/bin/bash
+source $ROOTCOREBIN/../RootCoreMacros/base_env.sh || { echo "Couldn't load base shell environment." && exit 1; }
+
+echo -n > "$NEW_ENV_FILE"
+chmod +x "$NEW_ENV_FILE"
+
+if type git >/dev/null 2>/dev/null & test "$RCM_GRID_ENV" -eq "0"; then
+  git update-index --assume-unchanged $MAKEFILE
+fi
+
+# Add debug mode to compilation
+if test -n "$TUNINGTOOL_DBG_LEVEL"; then
+  #old_field=$("$ROOTCOREDIR/scripts/get_field.sh" "$MAKEFILE" PACKAGE_CXXFLAGS)
+  TUNINGTOOL_DBG_LEVEL_CXXFLAGS="-DTUNINGTOOL_DBG_LEVEL=$TUNINGTOOL_DBG_LEVEL"
+  $ROOTCOREDIR/scripts/set_field.sh $MAKEFILE PACKAGE_CXXFLAGS "$TUNINGTOOL_DBG_LEVEL_CXXFLAGS"
+else
+  $ROOTCOREDIR/scripts/set_field.sh $MAKEFILE PACKAGE_CXXFLAGS ""
+fi
+
+test "x$TUNINGTOOL_ALL" != "x" && test "$TUNINGTOOL_ALL" -eq 1 && TUNINGTOOL_EXMACHINA=1 \
+                                                               && TUNINGTOOL_FASTNET=1
+
+# Check if environment variables defining core compilation are not set and, if
+# so, set them:
+test "x$TUNINGTOOL_EXMACHINA" = "x" && TUNINGTOOL_EXMACHINA=0
+test "x$TUNINGTOOL_FASTNET" = "x" && TUNINGTOOL_FASTNET=0
+
+# Set default core:
+test "$TUNINGTOOL_EXMACHINA" -eq "0" \
+  -a "$TUNINGTOOL_FASTNET" -eq "0" \
+  && TUNINGTOOL_FASTNET=1
+
+if test "$TUNINGTOOL_EXMACHINA" -eq "1"; then
+  echo "Installing ExMachina..."
+  if test "$RCM_GRID_ENV" -eq "1"; then
+    echo "ExMachina is not available on the grid environment." && exit 1;
+  fi
+  source install_exmachina_deps.sh || { echo "Couldn't install needed dependencies." && exit 1; }
+fi
+
+if test "$TUNINGTOOL_FASTNET" -eq "1"; then
+  echo "Installing Fastnet..."
+
+	# Retrieve python information
+	source "$ROOTCOREBIN/../RootCoreMacros/retrieve_python_info.sh" --numpy-info \
+			|| { echo "Couldn't load python information." && exit 1;}
+
+  $ROOTCOREDIR/scripts/set_field.sh $MAKEFILE PACKAGE_OBJFLAGS "-std=c++11 -fPIC -lboost_python"
+  $ROOTCOREDIR/scripts/set_field.sh $MAKEFILE PACKAGE_LDFLAGS "-lRingerCore -fPIC -lboost_python"
+
+	# Compile boost python library (if needed):
+  if ! source "$ROOTCOREBIN/../RingerCore/cmt/check_install_boost.sh" \
+              --check-header="./boost_test.cxx" \
+              --bootstrap-extra-args="--with-libraries=python" \
+              --b2-extra-args="--with-python" \
+              --extra-test-args="$PYTHON_LIBRARY_PATH -l$PYTHON_LIB_VERSION $PYTHON_INCLUDE_PATH"
+  then
+    echo "Something went wrong when trying to check or install boost." && exit 1;
+  fi
+
+  test -n "$PYTHON_LIBRARY_PATH" && add_to_env_file LD_LIBRARY_PATH "${PYTHON_LIBRARY_PATH[*]:2}"
+
+	# Change our Makefile to add dependent information:
+  old_field=$($ROOTCOREDIR/scripts/get_field.sh $MAKEFILE PACKAGE_OBJFLAGS)
+  if test "${old_field#*"$PYTHON_INCLUDE_PATH $INCLUDE_NUMPY"}" = "$old_field"; then
+    $ROOTCOREDIR/scripts/set_field.sh $MAKEFILE PACKAGE_OBJFLAGS "$old_field -l$PYTHON_LIB_VERSION $PYTHON_INCLUDE_PATH $INCLUDE_NUMPY" # -v
+  fi
+
+	# Change our Makefile to add dependent information:
+  if check_openmp && test "$RCM_NCPUS" -ne "1"; then
+    OPENMP_OPTS="-fopenmp -lgomp -DUSING_MULTI_THREAD"
+    old_field=$($ROOTCOREDIR/scripts/get_field.sh $MAKEFILE PACKAGE_OBJFLAGS)
+    if test "${old_field#*$OPENMP_OPTS}" = "$old_field"; then
+      $ROOTCOREDIR/scripts/set_field.sh $MAKEFILE \
+       PACKAGE_OBJFLAGS "$old_field $OPENMP_OPTS"
+    fi
+  fi
+
+	# Also the linking:
+  old_field=$($ROOTCOREDIR/scripts/get_field.sh $MAKEFILE PACKAGE_LDFLAGS)
+  if test "${old_field#*"$PYTHON_LIBRARY_PATH"}" = "$old_field"; then
+    $ROOTCOREDIR/scripts/set_field.sh $MAKEFILE PACKAGE_LDFLAGS "$old_field -l$PYTHON_LIB_VERSION $PYTHON_LIBRARY_PATH" #   -Wl,--verbose
+  fi
+
+  # Add openmp
+  if check_openmp && test "$RCM_NCPUS" -ne "1"; then
+    OPENMP_LD_OPTS="-lgomp -DUSING_MULTI_THREAD"
+    old_field=$($ROOTCOREDIR/scripts/get_field.sh $MAKEFILE PACKAGE_LDFLAGS)
+    if test "${old_field#*$OPENMP_LD_OPTS}" = "$old_field"; then
+      $ROOTCOREDIR/scripts/set_field.sh $MAKEFILE \
+       PACKAGE_LDFLAGS "$old_field $OPENMP_LD_OPTS"
+    fi
+  fi
+
+
+  # For each .cxx-inactive file, move it to .cxx
+	for file in $(find "../Root" -name "*.cxx-inactive")
+	do
+    mv "$file" "${file%%-inactive}"
+  done
+else
+  # When not compiling Fastnet, remove any dependency added by Fastnet.
+	$ROOTCOREDIR/scripts/set_field.sh $MAKEFILE PACKAGE_OBJFLAGS ""
+	$ROOTCOREDIR/scripts/set_field.sh $MAKEFILE PACKAGE_LDFLAGS ""
+  # For each .cxx file, move it to .cxx-inactive (do not compile Fastnet)
+	for file in $(find "../Root" -name "*.cxx")
+	do
+    mv "$file" "${file}-inactive"
+  done
+fi
+
+# Add grid_submit scripts to path
+add_to_env_file PATH "\$ROOTCOREBIN/user_scripts/TuningTools/grid_scripts/"
+add_to_env_file PATH "\$ROOTCOREBIN/user_scripts/TuningTools/standalone/"
+
+# Flag cores compiled
+add_to_env_file TUNINGTOOL_EXMACHINA $TUNINGTOOL_EXMACHINA --only-set
+add_to_env_file TUNINGTOOL_FASTNET $TUNINGTOOL_FASTNET --only-set
+
+true
