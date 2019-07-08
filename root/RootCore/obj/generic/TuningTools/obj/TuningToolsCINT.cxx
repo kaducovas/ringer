@@ -45,10 +45,12 @@ namespace std {} using namespace std;
 #include "TuningTools/RingerPhysVal.h"
 #include "TuningTools/RingerPhysVal_v2.h"
 #include "TuningTools/SkimmedNtuple.h"
+#include "TuningTools/SkimmedNtuple_v2.h"
 #include "TuningTools/MuonPhysVal.h"
 #include "TuningTools/RingerPhysVal.h"
 #include "TuningTools/RingerPhysVal_v2.h"
 #include "TuningTools/SkimmedNtuple.h"
+#include "TuningTools/SkimmedNtuple_v2.h"
 
 // Header files passed via #pragma extra_include
 
@@ -233,6 +235,51 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
+   static TClass *SkimmedNtuple_v2_Dictionary();
+   static void SkimmedNtuple_v2_TClassManip(TClass*);
+   static void *new_SkimmedNtuple_v2(void *p = 0);
+   static void *newArray_SkimmedNtuple_v2(Long_t size, void *p);
+   static void delete_SkimmedNtuple_v2(void *p);
+   static void deleteArray_SkimmedNtuple_v2(void *p);
+   static void destruct_SkimmedNtuple_v2(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::SkimmedNtuple_v2*)
+   {
+      ::SkimmedNtuple_v2 *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::SkimmedNtuple_v2));
+      static ::ROOT::TGenericClassInfo 
+         instance("SkimmedNtuple_v2", "TuningTools/SkimmedNtuple_v2.h", 9,
+                  typeid(::SkimmedNtuple_v2), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &SkimmedNtuple_v2_Dictionary, isa_proxy, 4,
+                  sizeof(::SkimmedNtuple_v2) );
+      instance.SetNew(&new_SkimmedNtuple_v2);
+      instance.SetNewArray(&newArray_SkimmedNtuple_v2);
+      instance.SetDelete(&delete_SkimmedNtuple_v2);
+      instance.SetDeleteArray(&deleteArray_SkimmedNtuple_v2);
+      instance.SetDestructor(&destruct_SkimmedNtuple_v2);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::SkimmedNtuple_v2*)
+   {
+      return GenerateInitInstanceLocal((::SkimmedNtuple_v2*)0);
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::SkimmedNtuple_v2*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+   // Dictionary for non-ClassDef classes
+   static TClass *SkimmedNtuple_v2_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::SkimmedNtuple_v2*)0x0)->GetClass();
+      SkimmedNtuple_v2_TClassManip(theClass);
+   return theClass;
+   }
+
+   static void SkimmedNtuple_v2_TClassManip(TClass* ){
+   }
+
+} // end of namespace ROOT
+
+namespace ROOT {
    // Wrappers around operator new
    static void *new_MuonPhysVal(void *p) {
       return  p ? new(p) ::MuonPhysVal : new ::MuonPhysVal;
@@ -315,6 +362,27 @@ namespace ROOT {
       ((current_t*)p)->~current_t();
    }
 } // end of namespace ROOT for class ::SkimmedNtuple
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_SkimmedNtuple_v2(void *p) {
+      return  p ? new(p) ::SkimmedNtuple_v2 : new ::SkimmedNtuple_v2;
+   }
+   static void *newArray_SkimmedNtuple_v2(Long_t nElements, void *p) {
+      return p ? new(p) ::SkimmedNtuple_v2[nElements] : new ::SkimmedNtuple_v2[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_SkimmedNtuple_v2(void *p) {
+      delete ((::SkimmedNtuple_v2*)p);
+   }
+   static void deleteArray_SkimmedNtuple_v2(void *p) {
+      delete [] ((::SkimmedNtuple_v2*)p);
+   }
+   static void destruct_SkimmedNtuple_v2(void *p) {
+      typedef ::SkimmedNtuple_v2 current_t;
+      ((current_t*)p)->~current_t();
+   }
+} // end of namespace ROOT for class ::SkimmedNtuple_v2
 
 namespace ROOT {
    static TClass *vectorlEvectorlEintgRsPgR_Dictionary();
@@ -695,69 +763,6 @@ namespace ROOT {
 } // end of namespace ROOT for class vector<string>
 
 namespace ROOT {
-   static TClass *vectorlEsignedsPchargR_Dictionary();
-   static void vectorlEsignedsPchargR_TClassManip(TClass*);
-   static void *new_vectorlEsignedsPchargR(void *p = 0);
-   static void *newArray_vectorlEsignedsPchargR(Long_t size, void *p);
-   static void delete_vectorlEsignedsPchargR(void *p);
-   static void deleteArray_vectorlEsignedsPchargR(void *p);
-   static void destruct_vectorlEsignedsPchargR(void *p);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const vector<signed char>*)
-   {
-      vector<signed char> *ptr = 0;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<signed char>));
-      static ::ROOT::TGenericClassInfo 
-         instance("vector<signed char>", -2, "vector", 216,
-                  typeid(vector<signed char>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &vectorlEsignedsPchargR_Dictionary, isa_proxy, 4,
-                  sizeof(vector<signed char>) );
-      instance.SetNew(&new_vectorlEsignedsPchargR);
-      instance.SetNewArray(&newArray_vectorlEsignedsPchargR);
-      instance.SetDelete(&delete_vectorlEsignedsPchargR);
-      instance.SetDeleteArray(&deleteArray_vectorlEsignedsPchargR);
-      instance.SetDestructor(&destruct_vectorlEsignedsPchargR);
-      instance.AdoptCollectionProxyInfo(TCollectionProxyInfo::Generate(TCollectionProxyInfo::Pushback< vector<signed char> >()));
-      return &instance;
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const vector<signed char>*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
-
-   // Dictionary for non-ClassDef classes
-   static TClass *vectorlEsignedsPchargR_Dictionary() {
-      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const vector<signed char>*)0x0)->GetClass();
-      vectorlEsignedsPchargR_TClassManip(theClass);
-   return theClass;
-   }
-
-   static void vectorlEsignedsPchargR_TClassManip(TClass* ){
-   }
-
-} // end of namespace ROOT
-
-namespace ROOT {
-   // Wrappers around operator new
-   static void *new_vectorlEsignedsPchargR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<signed char> : new vector<signed char>;
-   }
-   static void *newArray_vectorlEsignedsPchargR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<signed char>[nElements] : new vector<signed char>[nElements];
-   }
-   // Wrapper around operator delete
-   static void delete_vectorlEsignedsPchargR(void *p) {
-      delete ((vector<signed char>*)p);
-   }
-   static void deleteArray_vectorlEsignedsPchargR(void *p) {
-      delete [] ((vector<signed char>*)p);
-   }
-   static void destruct_vectorlEsignedsPchargR(void *p) {
-      typedef vector<signed char> current_t;
-      ((current_t*)p)->~current_t();
-   }
-} // end of namespace ROOT for class vector<signed char>
-
-namespace ROOT {
    static TClass *vectorlEshortgR_Dictionary();
    static void vectorlEshortgR_TClassManip(TClass*);
    static void *new_vectorlEshortgR(void *p = 0);
@@ -1079,6 +1084,7 @@ namespace {
 "TuningTools/RingerPhysVal.h",
 "TuningTools/RingerPhysVal_v2.h",
 "TuningTools/SkimmedNtuple.h",
+"TuningTools/SkimmedNtuple_v2.h",
 0
     };
     static const char* includePaths[] = {
@@ -1097,12 +1103,11 @@ namespace {
 #pragma clang diagnostic ignored "-Wignored-attributes"
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 extern int __Cling_Autoloading_Map;
-namespace std{template <typename _Tp> class __attribute__((annotate("$clingAutoload$bits/allocator.h")))  __attribute__((annotate("$clingAutoload$string")))  allocator;
-}
 struct __attribute__((annotate("$clingAutoload$TuningTools/MuonPhysVal.h")))  MuonPhysVal;
 struct __attribute__((annotate("$clingAutoload$TuningTools/RingerPhysVal.h")))  RingerPhysVal;
 struct __attribute__((annotate("$clingAutoload$TuningTools/RingerPhysVal_v2.h")))  RingerPhysVal_v2;
 class __attribute__((annotate("$clingAutoload$TuningTools/SkimmedNtuple.h")))  SkimmedNtuple;
+class __attribute__((annotate("$clingAutoload$TuningTools/SkimmedNtuple_v2.h")))  SkimmedNtuple_v2;
 )DICTFWDDCLS";
     static const char* payloadCode = R"DICTPAYLOAD(
 #line 1 "TuningToolsCINT dictionary payload"
@@ -1128,12 +1133,13 @@ class __attribute__((annotate("$clingAutoload$TuningTools/SkimmedNtuple.h")))  S
 #include "TuningTools/RingerPhysVal.h"
 #include "TuningTools/RingerPhysVal_v2.h"
 #include "TuningTools/SkimmedNtuple.h"
+#include "TuningTools/SkimmedNtuple_v2.h"
 #include "TuningTools/MuonPhysVal.h"
 #include "TuningTools/RingerPhysVal.h"
 #include "TuningTools/RingerPhysVal_v2.h"
 #include "TuningTools/SkimmedNtuple.h"
-#include <vector>
-#include <utility>
+#include "TuningTools/SkimmedNtuple_v2.h"
+//#include <vector>
 
 #if defined(__CLING__) || defined(__CINT__)
 #pragma link off all globals;
@@ -1144,14 +1150,14 @@ class __attribute__((annotate("$clingAutoload$TuningTools/SkimmedNtuple.h")))  S
 // Create dictionaries for the used vector types:
 //#pragma link C++ class std::vector<float>+;
 //#pragma link C++ class std::vector< std::vector<float> >+;
-#pragma link C++ class std::vector<int8_t>+;
-#pragma link C++ class std::vector<std::pair<std::string,int>+;
+//#pragma link C++ class std::vector<int8_t>+;
 
 // And for the event model class:
 #pragma link C++ class RingerPhysVal+;
 #pragma link C++ class RingerPhysVal_v2+;
 #pragma link C++ class MuonPhysVal+;
 #pragma link C++ class SkimmedNtuple+;
+#pragma link C++ class SkimmedNtuple_v2+;
 
 #endif
 
@@ -1162,6 +1168,7 @@ class __attribute__((annotate("$clingAutoload$TuningTools/SkimmedNtuple.h")))  S
 "RingerPhysVal", payloadCode, "@",
 "RingerPhysVal_v2", payloadCode, "@",
 "SkimmedNtuple", payloadCode, "@",
+"SkimmedNtuple_v2", payloadCode, "@",
 nullptr};
 
     static bool isInitialized = false;

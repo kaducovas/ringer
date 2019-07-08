@@ -40,9 +40,9 @@ from . import Rounding
 __all__.extend( Rounding.__all__ )
 from .Rounding import *
 
-from . import tex
-__all__.extend( tex.__all__ )
-from .tex import *
+#from . import tex
+#__all__.extend( tex.__all__ )
+#from .tex import *
 
-__version__ = RingerCoreGit.tag
-__project_version__ = ProjectGit.tag
+#__version__ = RingerCoreGit.tag
+#__project_version__ = ProjectGit.tag
